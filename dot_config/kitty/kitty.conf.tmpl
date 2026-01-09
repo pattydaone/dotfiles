@@ -6,8 +6,8 @@
 {{- if eq .chezmoi.hostname "deskytoppy" }}
 font_family      family="JetBrainsMono Nerd Font"
 {{- end }}
-{{- if eq .chezmoi.hostname "Patricks-Macbook-Air" }}
-font_family      family="JetBrainsMono Nerd Font Mono"
+{{- if eq .chezmoi.hostname "Patricks-MacBook-Air" }}
+font_family      family="JetBrainsMonoNL Nerd Font Mono"
 {{- end }}
 bold_font        auto
 italic_font      auto
@@ -18,7 +18,7 @@ bold_italic_font auto
 background_opacity 0.85
 background_image none
 
-{{- if eq .chezmoi.hostname "Patricks-Macbook-Air" }}
+{{- if eq .chezmoi.hostname "Patricks-MacBook-Air" }}
 include ./theme.conf
 {{- end }}
 

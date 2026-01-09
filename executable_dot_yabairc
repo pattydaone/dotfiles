@@ -1,0 +1,42 @@
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# Layout
+yabai -m config layout bsp
+
+# New windows spawn to the right/below
+yabai -m config window_placement second_child
+
+# Padding
+yabai -m config top_padding    0
+yabai -m config bottom_padding 0
+yabai -m config left_padding   0
+yabai -m config right_padding  0
+yabai -m config window_gap     2
+
+# Split rations
+yabai -m config auto_balance off
+yabai -m config split_ratio 0.5
+
+# Mouse configuration
+yabai -m config mouse_modifier fn
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config focus_follows_mouse autoraise
+yabai -m config mouse_follows_focus on
+
+# Window configuration
+yabai -m config window_shadow float
+yabai -m config window_opacity off
+
+# Bar support
+yabai -m config external_bar main:40:0
+
+# Problematic apps
+yabai -m rule --add app="^(Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|App Store|Steam|Activity Monitor)$" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
+yabai -m rule --add title="Picture-in-Picture" manage=off
+yabai -m rule --add title="MiniPlayer" manage=off

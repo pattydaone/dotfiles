@@ -1,0 +1,18 @@
+# pack-refs with: peeled fully-peeled sorted 
+acfa88941a044347515b3f5a4e2ae66b41f6f939 refs/remotes/origin/call-handle-on-is-playing-change
+3f7f1819dbed42902f93011fece685eae72a2c60 refs/remotes/origin/fix-chromium-tab-close
+54b7114bb97ca80bbfded6efefcf7a42efea7f2b refs/remotes/origin/master
+734151f923d6dd6fe93af4abac72d35bb0ec24e1 refs/tags/v0.1.0
+13bf69e6a904fd74895d6fba86992901a602c2dc refs/tags/v0.1.1
+a29715644e318d5cc2df46ef1ad688f75f80478b refs/tags/v0.2.0
+0a01a9d8b22c0cc9a12d20ea3eab5eeaa4ddd53b refs/tags/v0.3.0
+7a4b784f34cb06f9f4717d61b544a9a379f3c30b refs/tags/v0.4.0
+8e0f41a22c4bcfde3d1b6c32b90139c1060e598d refs/tags/v0.4.1
+7c6bb18db8cf7a42fee4b7e71654cdd7c368e241 refs/tags/v0.4.2
+dbc14f73327d85f48e624739136fa84b073dfb6b refs/tags/v0.5.0
+7680c87af90787b8ba753c787098fd90afbd1014 refs/tags/v0.5.1
+c172c15f32504cf04b549c054fbc906d50d4a581 refs/tags/v0.5.2
+4a170323cb5e91ef5a39208d0b2cd03c2f34f124 refs/tags/v0.6.0
+252de63fee59dd8310191cba55d7ed46805ced4d refs/tags/v0.7.0
+7df47e32fbe9d2ffbacc5e662b94c92ff04e7b98 refs/tags/v0.7.1
+dc3ff1740e2035a2490ec67d3b33322449af780a refs/tags/v0.7.2

@@ -1,0 +1,12 @@
+{{- if ne .chezmoi.os "linux" }}
+.config/electron-flags.conf
+.config/greetd/*
+.config/sway/*
+.config/waybar/*
+{{- end }}
+
+{{- if ne .chezmoi.os "darwin" }}
+executable_dot_yabairc
+.config/sketchybar/*
+.config/skhd/*
+{{- end }}

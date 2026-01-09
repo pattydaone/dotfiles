@@ -1,0 +1,4 @@
+/Users/patrick/.config/sketchybar/helpers/mediaChange/bin/CMakeFiles/MediaRemoteAdapter.dir
+/Users/patrick/.config/sketchybar/helpers/mediaChange/bin/CMakeFiles/MediaRemoteAdapterTestClient.dir
+/Users/patrick/.config/sketchybar/helpers/mediaChange/bin/CMakeFiles/edit_cache.dir
+/Users/patrick/.config/sketchybar/helpers/mediaChange/bin/CMakeFiles/rebuild_cache.dir

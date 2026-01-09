@@ -1,0 +1,115 @@
+# hotkey       = <mode> '<' <action> | <action>
+# 
+# mode         = 'name of mode' | <mode> ',' <mode>
+# 
+# action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
+#                <keysym> ':' <command>          | <keysym> '->' ':' <command>
+#                <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
+# 
+# keysym       = <mod> '-' <key> | <key>
+# 
+# mod          = 'modifier keyword' | <mod> '+' <mod>
+# 
+# key          = <literal> | <keycode>
+# 
+# literal      = 'single letter or built-in keyword'
+# 
+# keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
+# 
+# proc_map_lst = * <proc_map>
+# 
+# proc_map     = <string> ':' <command> | <string>     '~' |
+#                '*'      ':' <command> | '*'          '~'
+# 
+# string       = '"' 'sequence of characters' '"'
+# 
+# command      = command is executed through '$SHELL -c' and
+#                follows valid shell syntax. if the $SHELL environment
+#                variable is not set, it will default to '/bin/bash'.
+#                when bash is used, the ';' delimeter can be specified
+#                to chain commands.
+# 
+#                to allow a command to extend into multiple lines,
+#                prepend '\' at the end of the previous line.
+# 
+#                an EOL character signifies the end of the bind.
+# 
+# ->           = keypress is not consumed by skhd
+# 
+# *            = matches every application not specified in <proc_map_lst>
+# 
+# ~            = application is unbound and keypress is forwarded per usual, when specified in a <proc_map>
+# 
+# mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
+#             '::' <name> '@'               | '::' <name>
+# 
+# name      = desired name for this mode,
+# 
+# @         = capture keypresses regardless of being bound to an action
+# 
+# command  = command is executed through '$SHELL -c' and
+#            follows valid shell syntax. if the $SHELL environment
+#            variable is not set, it will default to '/bin/bash'.
+#            when bash is used, the ';' delimeter can be specified
+#            to chain commands.
+# 
+#            to allow a command to extend into multiple lines,
+#            prepend '\' at the end of the previous line.
+# 
+#            an EOL character signifies the end of the bind.
+
+# Stop/start Services
+cmd         - 0      : yabai --stop-service
+cmd         - 9      : yabai --start-service
+
+# Window control
+cmd + shift - h      : yabai -m window --focus  west
+cmd + shift - j      : yabai -m window --focus  south
+cmd + shift - k      : yabai -m window --focus  north
+cmd + shift - l      : yabai -m window --focus  east
+cmd + shift - f      : yabai -m window --toggle zoom-fullscreen
+cmd + shift - w      : /Users/patrick/.config/skhd/resizeVertical.sh -5
+cmd + shift - a      : /Users/patrick/.config/skhd/resizeHorizontal.sh -5
+cmd + shift - s      : /Users/patrick/.config/skhd/resizeVertical.sh 5
+cmd + shift - d      : /Users/patrick/.config/skhd/resizeHorizontal.sh 5
+cmd + shift - e      : yabai -m space --balance
+alt         - w      : yabai -m window --swap   north
+alt         - a      : yabai -m window --swap   west
+alt         - s      : yabai -m window --swap   south
+alt         - d      : yabai -m window --swap   east
+
+# Space control
+cmd + shift - c      : yabai -m space  --create
+cmd + shift - x      : yabai -m space  --destroy
+cmd + shift - 1      : yabai -m space  --focus  1
+cmd + shift - 2      : yabai -m space  --focus  2
+cmd + shift - 3      : yabai -m space  --focus  3
+cmd + shift - 4      : yabai -m space  --focus  4
+cmd + shift - 5      : yabai -m space  --focus  5
+cmd + shift - 6      : yabai -m space  --focus  6
+cmd + shift - 7      : yabai -m space  --focus  7
+cmd + shift - 8      : yabai -m space  --focus  8
+cmd + shift - 9      : yabai -m space  --focus  9
+cmd + shift - 0      : yabai -m space  --focus 10
+cmd + alt   - 1      : yabai -m window --space  1
+cmd + alt   - 2      : yabai -m window --space  2
+cmd + alt   - 3      : yabai -m window --space  3
+cmd + alt   - 4      : yabai -m window --space  4
+cmd + alt   - 5      : yabai -m window --space  5
+cmd + alt   - 6      : yabai -m window --space  6
+cmd + alt   - 7      : yabai -m window --space  7
+cmd + alt   - 8      : yabai -m window --space  8
+cmd + alt   - 9      : yabai -m window --space  9
+cmd + alt   - 0      : yabai -m window --space 10
+cmd + alt   - h      : yabai -m space  --focus prev || yabai -m space --focus last
+cmd + alt   - l      : yabai -m space  --focus next || yabai -m space --focus first
+
+# Display control
+cmd + alt   - o      : yabai -m window --display 1
+cmd + alt   - p      : yabai -m window --display 2
+
+# Open terminal
+cmd + shift - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+
+# Toggle media
+cmd - p : sketchybar --trigger toggleMedia
