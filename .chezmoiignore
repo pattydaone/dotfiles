@@ -3,6 +3,7 @@
 .config/greetd
 .config/sway
 .config/waybar
+.swaylock
 {{- end }}
 
 {{- if ne .chezmoi.os "darwin" }}
