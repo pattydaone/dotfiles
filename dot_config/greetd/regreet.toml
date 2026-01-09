@@ -1,0 +1,18 @@
+[background]
+path = "/usr/share/backgrounds/greeter.png"
+fit = "Fill"
+
+[commands]
+reboot = [ "systemctl", "reboot" ]
+poweroff = [ "systemctl", "poweroff" ]
+
+[GTK]
+
+application_prefer_dark_theme = true
+cursor_blink = true
+
+[widget.clock]
+
+format = "%a %m/%d %H:%M"
+resolution = "500ms"
+label_width = 200

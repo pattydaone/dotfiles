@@ -1,0 +1,6 @@
+if [[ `swaymsg -t get_tree | grep '"app_id": "cpu"'` ]];
+then
+    kill `swaymsg -t get_tree | jq -r '..|try select(.name == "btop").pid'`;
+else
+    kitty -c ~/.config/kitty/cpuKitty.conf --app-id=cpu btop -c ~/.config/btop/btopCpu.conf;
+fi

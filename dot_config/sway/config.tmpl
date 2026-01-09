@@ -1,0 +1,280 @@
+# Autostart fcitx5
+exec fcitx5
+# Autostart polkit (allows dolphin to elevate privalege)
+exec /usr/lib/polkit-kde-authentication-agent-1
+# Autostart Blueman
+exec blueman-applet
+# For default application launching
+exec XDG_MENU_PREFIX=arch-; kbuildsycoca6
+# Launcher
+exec vicinae server
+
+{{- if eq .chezmoi.hostname "deskytoppy" }}
+# SwayFX stuff
+corner_radius 15
+shadows enable
+blur enable
+blur_passes 1
+{{- end }}
+
+default_border pixel 2
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term kitty
+# Your preferred application launcher
+set $menu exec vicinae toggle
+# $term -c ~/.config/kitty/launcherKitty.conf --app-id=launcher env FZF_EXTRA_OPTIONS="--reverse" sway-launcher-desktop
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+{{- if eq .chezmoi.hostname "deskytoppy" }}
+output * bg /usr/share/backgrounds/sway/firewatch.png fill
+output HDMI-A-3 mode 1920x1080@144Hz pos 0 0
+output DP-1 mode 1920x1080@180Hz pos 1920 0
+focus output HDMI-A-3
+{{- end }}
+
+# Float Picture-in-Picture
+for_window [title="Picture-in-Picture"] floating enable
+# Float Paypal
+for_window [title="PayPal — Zen Browser"] floating enable
+# Float app launcher
+for_window [app_id="^launcher$"] floating enable, sticky enable, blur enable, blur_passes 2, resize set 768 px 324 px, border pixel 0, move position 576 px 0 px 
+# Float Btop
+for_window [app_id="cpu"] floating enable, sticky enable, resize set 700 px 525 px, border pixel 0, move position 1220 px 0 px
+# Float Blueman
+for_window [app_id="blueman-manager"] floating enable, sticky enable, resize set 700 px 500 px, border pixel 0, move position 1220 px 0 px
+# Float sonusmix
+for_window [app_id="org.sonusmix.Sonusmix"] floating enable, sticky enable, resize set 700 px 500 px, border pixel 0, move position 1100 px 0 px
+
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+exec swayidle -w \
+         timeout 300 'swaylock' \
+         timeout 360 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock'
+
+# Sleep
+bindsym $mod+shift+grave exec swaylock; exec systemctl suspend
+
+### Input configuration
+
+input "13159:6502:Endgame_Gear_Endgame_Gear_XM2_8k_Gaming_Mouse" {
+	accel_profile flat
+	middle_emulation enabled
+	natural_scroll disabled
+	pointer_accel 0.1
+}
+
+input "1452:591:Keychron_Keychron_C2" {
+	xkb_layout us
+	xkb_numlock enabled
+}
+
+#
+# You can also configure each device individually.
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+q kill
+
+    # Start your launcher
+    bindsym $mod+space exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+{{- if eq .chezmoi.hostname "deskytoppy" }}
+    # Define workspaces
+    set $out-left "HDMI-A-3"
+    set $out-right "DP-1"
+
+    set $r1 "1"
+    set $r2 "3"
+    set $r3 "5"
+    set $r4 "7"
+    set $r5 "9"
+    workspace $r1 output $out-left
+    workspace $r2 output $out-left
+    workspace $r3 output $out-left
+    workspace $r4 output $out-left
+    workspace $r5 output $out-left
+
+    set $l1 "2"
+    set $l2 "4"
+    set $l3 "6"
+    set $l4 "8"
+    set $l5 "10"
+    workspace $l1 output $out-right
+    workspace $l2 output $out-right
+    workspace $l3 output $out-right
+    workspace $l4 output $out-right
+    workspace $l5 output $out-right
+
+    # Switch to workspace
+    bindsym $mod+1 workspace $r1
+    bindsym $mod+2 workspace $l1
+    bindsym $mod+3 workspace $r2
+    bindsym $mod+4 workspace $l2
+    bindsym $mod+5 workspace $r3
+    bindsym $mod+6 workspace $l3
+    bindsym $mod+7 workspace $r4
+    bindsym $mod+8 workspace $l4
+    bindsym $mod+9 workspace $r5
+    bindsym $mod+0 workspace $l5
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace $r1
+    bindsym $mod+Shift+2 move container to workspace $l1
+    bindsym $mod+Shift+3 move container to workspace $r2
+    bindsym $mod+Shift+4 move container to workspace $l2
+    bindsym $mod+Shift+5 move container to workspace $r2
+    bindsym $mod+Shift+6 move container to workspace $l3
+    bindsym $mod+Shift+7 move container to workspace $r4
+    bindsym $mod+Shift+8 move container to workspace $l4
+    bindsym $mod+Shift+9 move container to workspace $r5
+    bindsym $mod+Shift+0 move container to workspace $l5
+{{- end }}
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    # bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+#
+# Utilities:
+#
+    # Special keys to adjust volume via PulseAudio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    # Special key to take a screenshot with flameshot
+    bindsym alt+shift+4 exec flameshot gui
+    # Lock
+    bindsym $mod+grave exec swaylock
+
+    # Flameshot for multiple monitors
+    for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    swaybar_command waybar
+}
+
+include /etc/sway/config.d/*

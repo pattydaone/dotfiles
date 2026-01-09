@@ -1,0 +1,6 @@
+if [[ `swaymsg -t get_tree | grep '"app_id": "blueman-manager"'` ]];
+then
+    kill `swaymsg -t get_tree | jq -r '..|try select(.name == "Bluetooth Devices").pid'`;
+else
+    blueman-manager;
+fi

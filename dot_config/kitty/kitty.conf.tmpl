@@ -1,0 +1,87 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+
+# My config (below stays for reference)
+
+# BEGIN_KITTY_FONTS
+{{- if eq .chezmoi.hostname "deskytoppy" }}
+font_family      family="JetBrainsMono Nerd Font"
+{{- end }}
+{{- if eq .chezmoi.hostname "Patricks-Macbook-Air" }}
+font_family      family="JetBrainsMono Nerd Font Mono"
+{{- end }}
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
+
+# Begin Color Scheme Configuration
+background_opacity 0.85
+background_image none
+
+{{- if eq .chezmoi.hostname "Patricks-Macbook-Air" }}
+include ./theme.conf
+{{- end }}
+
+{{- if eq .chezmoi.hostname "deskytoppy" }}
+background #14161b
+selection_background #e0e2ea
+foreground #e0e2ea
+selection_foreground #14161b
+
+url_color #f6ccfb
+
+cursor #9b9ea4
+cursor_text_color #e0e2ea
+
+# Black
+color0 #07070c
+#07080d
+color8 #4f5157
+#4f5157
+
+# Red
+color1 #f5c2bb
+#ffc0b9
+color9 #f5c2bb
+
+# Green
+color2 #c1f4c4
+#b3f6c0
+color10 #c1f4c4
+
+# Yellow
+color3 #f7e19d
+#fce094
+color11 #f7e19d
+
+# Blue
+color4 #b0d9fb
+#a6dbff
+color12 #b0d9fb
+
+# Magenta
+color5 #f6ccfb
+#ffcaff
+color13 #f6ccfb
+
+# Cyan
+color6 #a6f5f5
+#8cf8f7
+color14 #a6f5f5
+
+# White
+color7 #eef0f7
+#eef1f8
+color15 #eef0f7
+# End Color Scheme Configuration
+{{- end }}
+
+# Begin Tab Bar Configuration
+tab_bar_edge top
+tab_bar_style separator
+# End Tab Bar Configuration
+
+{{- if eq .chezmoi.hostname "deskytoppy" }}
+linux_display_server wayland
+wayland_enable_ime yes
+{{- end }}

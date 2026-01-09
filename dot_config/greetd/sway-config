@@ -1,0 +1,21 @@
+exec "regreet; swaymsg exit"
+
+input "13159:6502:Endgame_Gear_Endgame_Gear_XM2_8K_Gaming_Mouse" {
+    accel_profile flat
+    middle_emulation enabled
+    natural_scroll disabled
+    pointer_accel 0.1
+}
+
+input "1452:591:Keychron_Keychron_C2" {
+    xkb_layout us
+    xkb_numlock enabled
+}
+
+bindsym Mod4+shift+e exec swaynag \
+-t warning \
+-m 'What do you want to do?' \
+-b 'Poweroff' 'systemctl poweroff' \
+-b 'Reboot' 'systemctl reboot'
+
+include /etc/sway/config.d/*

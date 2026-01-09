@@ -1,0 +1,142 @@
+{
+    "output": ["HDMI-A-3", "DP-1"],
+    "position": "top",
+    "height": 34,
+    "modules-left": ["sway/workspaces"],
+    "modules-right": ["group/Audio", "bluetooth", "network", "clock", "group/Power"],
+    "modules-center": ["cpu", "memory"],
+    "spacing": 5,
+    "group/Power": {
+        "orientation": "horizontal",
+        "modules": ["custom/powerIcon", "custom/reboot", "custom/lock", "custom/power"],
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false,
+            "click-to-reveal": true
+        }
+    },
+    "group/Hardware": {
+        "orientation": "horizontal",
+        "modules": ["cpu", "custom/gpu", "memory"],
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false,
+            "click-to-reveal": false
+        }
+    },
+    "group/Audio": {
+        "orientation": "horizontal",
+        "modules": ["pulseaudio", "pulseaudio/slider"],
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false,
+            "click-to-reveal": false
+        }
+    },
+    "cpu": {
+        "format": "CPU {usage}%",
+        "on-click": "~/.config/waybar/cpu.sh",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "memory": {
+        "format": "Mem {percentage}%",
+        "interval": 30,
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "custom/gpu": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "format": "GPU {}%",
+        "return-type": "",
+        "interval": 3,
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "bluetooth": {
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-on": "󰂯",
+        "format-connected": "󰂱",
+        "on-click": "~/.config/waybar/bluetooth.sh",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "{signalStrength}% 󰖩 ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+        "format-disconnected": "󱚼",
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid}",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+    "clock": {
+        "format": "{:%a %m/%d   %H:%M}",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+            "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "phone-muted": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "~/.config/waybar/sonusmix.sh",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+    "sway/workspaces": {
+        "persistent-workspaces": {
+            "1": ["HDMI-A-3"],
+            "2": ["DP-1"],
+            "3": ["HDMI-A-3"],
+            "4": ["DP-1"],
+            "5": ["HDMI-A-3"],
+            "6": ["DP-1"],
+            "7": ["HDMI-A-3"],
+            "8": ["DP-1"],
+            "9": ["HDMI-A-3"],
+            "10": ["DP-1"]
+        }
+    },
+    "custom/powerIcon": {
+        "format": ""
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": true,
+        "tooltip-format": "Shutdown",
+        "on-click": "shutdown now"
+    },
+    "custom/lock": {
+        "format": "󰍁",
+        "tooltip": true,
+        "tooltip-format": "Lock",
+        "on-click": "swaylock"
+    },
+    "custom/reboot": {
+        "format": "󰜉",
+        "tooltip": true,
+        "tooltip-format": "Restart",
+        "on-click": "reboot"
+    }
+}
